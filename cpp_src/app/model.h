@@ -8,6 +8,10 @@
 #include <stdexcept>
 #include <vector>
 
+// из этого собираю динамическую библиотеку с тремя публичными функциями наружу
+// подключить ее к питону
+// фронт разделить на кнопки и собирать оттуда строку и х если он есть, подумать как это сделать красиво
+
 namespace s21 {
 
 enum Type {
@@ -56,7 +60,7 @@ class Model {
       const char* str, double x_min, double x_max);
 
  private:
-  class Parser {
+  class Parser { // композиция-наследование почему вообще это внутри ???
    public:
     list ParseNodes(const char* str);
 

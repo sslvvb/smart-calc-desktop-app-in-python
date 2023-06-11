@@ -2,7 +2,7 @@ from sys import argv
 from calculator.simple import SimpleCalculator
 
 def calc(text):
-	
+	"""based on the input text, return the operation result"""
 	try:
 		c = SimpleCalculator()
 		c.run(text)
