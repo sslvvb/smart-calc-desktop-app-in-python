@@ -5,7 +5,7 @@ DEBUG_FLAG = -g3 #-fsanitize=address
 GTEST_LIBS := -lgtest -lpthread #`pkg-config --libs gtest
 
 all: compile run
-
+ 
 install: compile
 	@mkdir SmartCalc
 	@cp smartCalc_v2 SmartCalc/smartCalc_v2
