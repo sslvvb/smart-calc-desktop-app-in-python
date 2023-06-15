@@ -1,13 +1,31 @@
 {
   "name": "electron_test",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Testing electron for calculator",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^25.1.0",
+    "electron-builder": "^24.4.0"
+  },
+  "build": {
+    "mac": {
+      "target": "dmg"
+    },
+    "extraFiles": [
+      {
+        "from": "./dist/reverse_text",
+        "to": "dist/reverse_text",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  }
 }
