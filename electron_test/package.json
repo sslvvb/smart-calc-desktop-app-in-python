@@ -15,6 +15,11 @@
     "electron-builder": "^24.4.0"
   },
   "build": {
+    "appId": "smartcalc-app",
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
     "mac": {
       "target": "dmg"
     },

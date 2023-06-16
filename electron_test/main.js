@@ -92,6 +92,7 @@ function createWindow() {
   });
 
   mainWindow.loadFile('index.html');
+  // mainWindow.loadURL('http://localhost:5000/test');
 
   mainWindow.on('closed', () => {
     mainWindow = null;
@@ -100,7 +101,7 @@ function createWindow() {
   mainWindow.webContents.openDevTools()
 
   let backend;
-  backend = path.join(process.cwd(), 'dist/reverse_text')
+  backend = path.join(process.cwd(), 'app_exe/reverse_text')
   var execfile = require('child_process').execFile;
   execfile(
     backend,
@@ -122,12 +123,19 @@ function createWindow() {
 }
 
 // app.on('ready', createWindow);
-app.on('ready', () => {
-  console.log('Electron app is ready.'); //
-  createWindow();
-});
+
+app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
+  const { exec } = require('child_process');
+  exec('taskkill / f / t / im app_exe/reverse_text', (err, stdout, stderr) => {
+    if (err) {
+      console.log(err)
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+    console.log(`stderr: ${stderr}`);
+  });
   if (process.platform !== 'darwin') {
     app.quit();
   }
@@ -138,6 +146,7 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
 
 // ipcMain.on('reverse-text', (event, text) => {
 //   console.log('Received text:', text);
@@ -163,5 +172,3 @@ app.on('activate', () => {
 //   pythonProcess.stdin.write(text);
 //   pythonProcess.stdin.end();
 // });
-
-// в чате последнее - тизвлечь скрипт из асар и попробовать использовать извлеченный
