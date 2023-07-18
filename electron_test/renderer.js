@@ -1,39 +1,31 @@
-let input = document.querySelector('#input')
-let result = document.querySelector('#result')
-let btn = document.querySelector('#btn')
+// const { ipcRenderer } = require('electron');
 
-function sendToPython() {
-  var { PythonShell } = require('python-shell');
+// const reverseButton = document.getElementById('reverseButton');
+// const textInput = document.getElementById('textInput');
+// const reversedText = document.getElementById('reversedText');
 
-  let options = {
-    mode: 'text'
-  };
+// reverseButton.addEventListener('click', () => {
+//     console.log('addEventListener click.'); //
+//     const text = textInput.value;
+//     ipcRenderer.send('reverse-text', text); // используется для отправки текста на бэкэнд
+// });
 
-  PythonShell.run('./py/server.py', options, function (err, results) {
-    if (err) throw err;
-    // results is an array consisting of messages collected during execution
-    console.log('response: ', results);
+// // Бэкэнд выполнит реверсирование текста и отправит измененный текст обратно на фронтэнд. // где это происходит ?
 
-  });
+// // Фронтенд прослушивает событие 'reversed-text' с помощью ipcRenderer.on и обновляет содержимое
+// // элемента reversedText полученным реверсированным текстом.
+// ipcRenderer.on('reversed-text', (event, reversed) => {
+//     console.log('ipcRenderer on reversed-text'); //
+//     reversedText.textContent = reversed;
+// });
+
+test = 'Hello'
+async function makePostRequest(test) {
+    axios.post('http://127.0.0.1:5000/test', test)
+        .then(function (response) {
+            console.log("It says: ", response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
-
-function onclick() {
-
-  fetch(`http://127.0.0.1:5001/${input.value}`).then((data) => {
-    return data.text();
-  }).then((text) => {
-    console.log("data: ", text);
-    result.textContent = text;
-  }).catch(e => {
-    console.log(e);
-  })
-
-}
-
-sendToPython();
-
-btn.addEventListener('click', () => {
-  onclick();
-});
-
-btn.dispatchEvent(new Event('click'))
