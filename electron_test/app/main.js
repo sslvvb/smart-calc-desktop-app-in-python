@@ -101,7 +101,7 @@ function createWindow() {
   mainWindow.webContents.openDevTools()
 
   let backend;
-  backend = path.join(process.cwd(), 'app_exe/reverse_text')
+  backend = path.join(process.cwd(), '../build/app_exe/reverse_text')
   var execfile = require('child_process').execFile;
   execfile(
     backend,
@@ -123,7 +123,6 @@ function createWindow() {
 }
 
 // app.on('ready', createWindow);
-
 app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
