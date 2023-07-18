@@ -1,4 +1,4 @@
-.PHONY: build clean create_executable
+.PHONY: build clean
 
 env:
 	python3 -m venv env_name
@@ -18,12 +18,12 @@ open:
 
 clean:
 	rm -rf dist/ build/ app_exe
-	rm -f model.spec reverse_text.spec
+	rm -f model.spec
 
 rebuild: clean build open
 
 create_executable:
-	pyinstaller --distpath ./build/app_exe -F app/model/reverse_text.py
+	pyinstaller --distpath ./app_exe -F model/reverse_text.py
 
 kill_port:
 	npx kill-port 5000
