@@ -1,0 +1,7 @@
+# pybind11
+# numpy
+# pyyaml
+pytz
+
+pyinstaller==5.12.0
+
