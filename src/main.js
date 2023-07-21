@@ -20,32 +20,37 @@ async function createWindow() {
   process.chdir(projectPath); // Change the working directory to the project folder.
   const subpy = spawn('python3', ['manage.py', 'runserver']);
 
-  // Listen for the 'error' event to handle any errors during process creation
-  subpy.on('error', (err) => {
-    console.error('Error starting Django server:', err);
-    // Handle the error as appropriate (e.g., show a message, exit the app, etc.)
-  });
+  // Add a delay before loading the URL
+  setTimeout(() => {
+    mainWindow.loadURL('http://127.0.0.1:8000');
+  }, 2000); // Adjust the delay (in milliseconds) as needed (e.g., 2000ms = 2 seconds).
 
-  // Listen for the 'close' event to handle when the process exits
-  subpy.on('close', (code, signal) => {
-    console.log(`Django server process exited with code ${code} and signal ${signal}`);
-    // Perform any cleanup or handle the process exit as needed
-  });
+  // // Listen for the 'error' event to handle any errors during process creation
+  // subpy.on('error', (err) => {
+  //   console.error('Error starting Django server:', err);
+  //   // Handle the error as appropriate (e.g., show a message, exit the app, etc.)
+  // });
 
-  let isServerReady = false;
-  while (!isServerReady) {
-    try {
-      const response = await axios.get('http://127.0.0.1:8000/server_ready/');
-      if (response.data.status === 'ready') {
-        isServerReady = true;
-        console.log('print before load url');
-        mainWindow.loadURL('http://127.0.0.1:8000');
-      }
-    } catch (error) {
-      // If the request fails, wait for a short time before trying again
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Adjust the delay as needed
-    }
-  }
+  // // Listen for the 'close' event to handle when the process exits
+  // subpy.on('close', (code, signal) => {
+  //   console.log(`Django server process exited with code ${code} and signal ${signal}`);
+  //   // Perform any cleanup or handle the process exit as needed
+  // });
+
+  // let isServerReady = false;
+  // while (!isServerReady) {
+  //   try {
+  //     const response = await axios.get('http://127.0.0.1:8000/server_ready/');
+  //     if (response.data.status === 'ready') {
+  //       isServerReady = true;
+  //       console.log('print before load url');
+  //       mainWindow.loadURL('http://127.0.0.1:8000');
+  //     }
+  //   } catch (error) {
+  //     // If the request fails, wait for a short time before trying again
+  //     await new Promise((resolve) => setTimeout(resolve, 1000)); // Adjust the delay as needed
+  //   }
+  // }
 
   // mainWindow.loadURL('http://127.0.0.1:8000');
 }
