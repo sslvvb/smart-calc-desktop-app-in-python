@@ -10,6 +10,7 @@ endif
 
 # Directories
 MODEL_DIR := app/project/smartcalc/services
+PROJECT_DIR := app/project
 
 # Platform-specific targets
 # ifeq ($(UNAME), Linux)
@@ -38,34 +39,32 @@ cpp_lib:
 	cd $(MODEL_DIR) && make $(REBUILD_TARGET)
 
 executable:
+	cd $(PROJECT_DIR) && pyinstaller smart_calc.spec
     # Add commands for creating the executable based on the platform
-    # Replace this comment with actual commands
+
+tmp: cpp_lib executable
+	cd app && electron .
+
 
 installation_file:
     # Add commands for creating the installation file based on the platform
-    # Replace this comment with actual commands
 
 run_app: cpp_lib executable installation_file
     # Add commands to run the application
-    # Replace this comment with actual commands
 
 clean:
-    # Add commands to clean the build artifacts
-    # Replace this comment with actual commands
+	cd $(PROJECT_DIR) && rm -rf build dist
+# Add commands to clean the build artifacts
 # rm -f package-lock.json
 # rm -rf dist
-# rm -rf duild dist
-# rm -f manage.spec
 
 test:
     # Add commands for running tests
-    # Replace this comment with actual commands
 
 pokritie_wtf:
 
 lint:
     # Add commands for linting the code
-    # Replace this comment with actual commands
 
 .PHONY: cpp_lib executable installation_file run_app clean test lint
 
