@@ -6,7 +6,9 @@ const axios = require('axios');
 const fs = require('fs');
 const { execFile } = require('child_process');
 
-fs.appendFile('/Users/sslvvb/Desktop/fix.txt', app.getAppPath() + '\n', (err) => {
+const FIX_PATH = '/Users/hjerilyn/Desktop/fix.txt';
+
+fs.appendFile(FIX_PATH, app.getAppPath() + '\n', (err) => {
   if (err) {
     console.error('Error appending to file:', err);
   } else {
@@ -23,7 +25,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js')
     }
   })
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   const appPath = app.getAppPath(); // Get the absolute path of the Electron app.
   // const projectPath = path.join(appPath, 'project'); // Construct the absolute path to the 'project' folder.
@@ -38,7 +40,7 @@ function createWindow() {
 
   // Ваш код для выполнения execFile с параметрами
   const filePath = path.join(appPath, 'project', 'dist', 'smart_calc', 'smart_calc');
-  fs.appendFile('/Users/sslvvb/Desktop/fix.txt', filePath + '\n', (err) => {
+  fs.appendFile(FIX_PATH, filePath + '\n', (err) => {
     if (err) {
       console.error('Error appending to file:', err);
     } else {
@@ -49,7 +51,7 @@ function createWindow() {
   execFile(filePath, args, (error, stdout, stderr) => {
     if (error) {
       console.error(`Ошибка при выполнении: ${error.message}`);
-      fs.appendFile('/Users/sslvvb/Desktop/fix.txt', `Ошибка при выполнении: ${error.message}` + '\n', (err) => {
+      fs.appendFile(FIX_PATH, `Ошибка при выполнении: ${error.message}` + '\n', (err) => {
         if (err) {
           console.error('Error appending to file:', err);
         } else {
@@ -62,7 +64,7 @@ function createWindow() {
     console.error(`stderr: ${stderr}`);
   });
 
-  fs.appendFile('/Users/sslvvb/Desktop/fix.txt', 'start django' + '\n', (err) => {
+  fs.appendFile(FIX_PATH, 'start django' + '\n', (err) => {
     if (err) {
       console.error('Error appending to file:', err);
     } else {
@@ -74,7 +76,7 @@ function createWindow() {
     console.log("start load url");
     mainWindow.loadURL('http://127.0.0.1:8000');
 
-    fs.appendFile('/Users/sslvvb/Desktop/fix.txt', 'done url' + '\n', (err) => {
+    fs.appendFile(FIX_PATH, 'done url' + '\n', (err) => {
       if (err) {
         console.error('Error appending to file:', err);
       } else {

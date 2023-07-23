@@ -1,7 +1,5 @@
-# pybind11
-# numpy
-# pyyaml
+numpy
+pyyaml
 pytz
-
 pyinstaller==5.12.0
-
+django

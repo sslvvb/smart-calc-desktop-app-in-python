@@ -1,14 +1,20 @@
+.PHONY: cpp_lib executable installation_file run_app clean test lint
+
+all: run_app
+
+cpp_lib:
+	cd app/project/smartcalc/services && g++ -shared -o model.so cpp_dynamic_lib/model.cpp cpp_dynamic_lib/parser.cpp cpp_dynamic_lib/wrapper.cpp
+
+executable:
+
+installation_file:
+
+run_app: cpp_lib executable
+
 clean:
-	rm -rf dist 
 
-clean_all:
-	rm -f package-lock.json
+test:
 
-dynamic_lib:
-	g++ -std=c++17 -shared -fPIC -o model/libcalculator.dylib model/model_c_plus_plus/model.cpp model/model_c_plus_plus/wrapper.cpp
-	g++ -shared -o model.so cpp_dynamic_lib/model.cpp cpp_dynamic_lib/wrapper.cpp
-	python3 calculator.py
+pokritie_wtf:
 
-exe:
-	pyinstaller smart_calc.spec
-	./dist/smart_calc/smart_calc runserver localhost:8000 --noreload
+lint:

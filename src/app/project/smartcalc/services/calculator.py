@@ -3,8 +3,8 @@
 import ctypes
 from typing import Union
 
-PATH_TO_lib = '/Users/sslvvb/Documents/S21/Projects/Python/python_calc_4/my_github_web_calc/project/smartcalc/services/model.so'
-# PATH_TO_lib: str = '/opt/goinfre/hjerilyn/projects/python_calc_4/my_github_calc_web/project/smartcalc/services/model.so'
+# PATH_TO_lib = '/Users/sslvvb/Documents/S21/Projects/Python/python_calc_4/my_github_web_calc/project/smartcalc/services/model.so'
+PATH_TO_lib: str = '/opt/goinfre/hjerilyn/projects/python_calc_4/my_github_calc_web/project/smartcalc/services/model.so'
 number_of_steps: int = 2000
 
 
