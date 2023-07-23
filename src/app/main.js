@@ -38,7 +38,6 @@ function createWindow() {
   // process.chdir(projectPath); // Change the working directory to the project folder.
   // const subpy = spawn('python3', ['manage.py', 'runserver']);
 
-  // Ваш код для выполнения execFile с параметрами
   const filePath = path.join(appPath, 'project', 'dist', 'smart_calc', 'smart_calc');
   fs.appendFile(FIX_PATH, filePath + '\n', (err) => {
     if (err) {

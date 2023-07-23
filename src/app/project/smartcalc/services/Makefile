@@ -1,14 +1,10 @@
-.PHONY: compile_arm64 rebuild
+.PHONY: compile_arm64 rebuild clean
 
-rebuild:
-    rm -f model.so && g++ -shared -o model.so cpp_dynamic_lib/model.cpp cpp_dynamic_lib/parser.cpp cpp_dynamic_lib/wrapper.cpp
-#	python3 calculator.py
+rebuild-macos-intel:
+	g++ -shared -o model.so cpp_dynamic_lib/model.cpp cpp_dynamic_lib/parser.cpp cpp_dynamic_lib/wrapper.cpp
 
-run:
-	python3 calculator.py
+rebuild-macos-arm:
+	g++-12 -arch arm64 -shared -o model.so cpp_dynamic_lib/model.cpp cpp_dynamic_lib/parser.cpp cpp_dynamic_lib/wrapper.cpp
 
-compile_arm64:
-    g++-12 -arch arm64 -shared -o model.so cpp_dynamic_lib/model.cpp cpp_dynamic_lib/parser.cpp cpp_dynamic_lib/wrapper.cpp
-
-bind_lib:
-    g++ -shared -o model.so -fPIC `python3 -m pybind11 --includes` cpp_dynamic_lib/model.cpp cpp_dynamic_lib/model_bind.cpp
+clean:
+	rm -f model.so
