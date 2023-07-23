@@ -11,46 +11,56 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # TODO: delete ?
 from .log_handlers import CustomTimedRotatingFileHandler
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+# SETTINGS_DIR = os.path.dirname(os.path.abspath(__file__))
+# SETTINGS_DIR = os.path.abspath(__file__)
+# BASE_DIR = os.path.dirname(os.path.dirname(SETTINGS_DIR))
+
+CONFIG_FILE_PATH = BASE_DIR.joinpath("config", "config.yml")
+DATA_FILE_PATH = BASE_DIR.joinpath("data", "history.txt")
+
+with open('/Users/sslvvb/Desktop/config.txt', 'a') as file:
+    file.write(str(BASE_DIR) + '\n')
 
 # import datetime
 # import pytz
 # current_time = datetime.datetime.now(pytz.timezone('Asia/Novosibirsk')).strftime("%d-%m-%y-%H-%M-%S")
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'project.log_handlers.CustomTimedRotatingFileHandler',
-            'filename': 'logs/logs_{current_time}.log',
-            # 'filename': str(BASE_DIR / f'logs/logs_{current_time}.log'),  # Use str() to convert Path to string
-            'when': 'H',
-            # 'when': 'D',
-            # 'when': 'M',
-            'backupCount': 30,
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'smartcalc': {
-            'handlers': ['file'],
-            'level': 'INFO',
-            'propagate': True,
-        }
-    },
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} UTC {asctime} {message}',
-            'style': '{',
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'project.log_handlers.CustomTimedRotatingFileHandler',
+#             'filename': 'logs/logs_{current_time}.log',
+#             # 'filename': str(BASE_DIR / f'logs/logs_{current_time}.log'),  # Use str() to convert Path to string
+#             'when': 'H',
+#             # 'when': 'D',
+#             # 'when': 'M',
+#             'backupCount': 30,
+#             'formatter': 'verbose',
+#         },
+#     },
+#     'loggers': {
+#         'smartcalc': {
+#             'handlers': ['file'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         }
+#     },
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} UTC {asctime} {message}',
+#             'style': '{',
+#         },
+#     },
+# }
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/

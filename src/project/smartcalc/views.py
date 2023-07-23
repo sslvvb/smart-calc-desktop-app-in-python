@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.http import JsonResponse
 
 
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -19,7 +19,7 @@ def index(request):
             result: str = services.get_expression_result(expression, x_value)
             if result != "Error in expression":
                 data['history'] = services.write_history(f'{expression}={result}; x={x_value}')
-            logger.info(f'{expression}={result}; x={x_value}')
+            # logger.info(f'{expression}={result}; x={x_value}')
             data['expression_or_result'] = result
             data['x_value'] = x_value
 
@@ -29,7 +29,7 @@ def index(request):
 def clean_history(request):
     if request.method == 'POST':
         services.clean_history()
-        logger.info('Clean history file.')
+        # logger.info('Clean history file.')
     return HttpResponseRedirect("/")
 
 
@@ -58,17 +58,17 @@ def graph(request):
         result: list = services.calculate_graph_expression_result(data['expression'], data['x_min'], data['x_max'])
         if result is None:
             data['expression'] = 'Error in expression'
-            logger.warning(f'Error in expression for graph: {expression}')
+            # logger.warning(f'Error in expression for graph: {expression}')
         else:
             xy_values: list = [{'x': x, 'y': y} for x, y in zip(result[0], result[1])]
             data['xy_values'] = xy_values
-            logger.info(f'Print graph for: {expression}')
+            # logger.info(f'Print graph for: {expression}')
     return render(request, 'graph.html', data)
 
 
 def about(request):
     data: dict = _collect_basic_data()
-    logger.info('Move to About page')
+    # logger.info('Move to About page')
     return render(request, "about.html", data)
 
 
@@ -84,10 +84,10 @@ def _collect_basic_data() -> dict:
 def _change_config(request, setting_name, log_message):
     if request.method == 'POST':
         setting_value = request.POST.get(setting_name)
-        if services.update_config(setting_name, setting_value):
-            logger.info(f'{log_message} to {setting_value}')
-        else:
-            logger.warning(f'Failed to {log_message} to {setting_value}')
+        # if services.update_config(setting_name, setting_value):
+        #     logger.info(f'{log_message} to {setting_value}')
+        # else:
+        #     logger.warning(f'Failed to {log_message} to {setting_value}')
     return HttpResponseRedirect("/")
 
 def server_ready(request):

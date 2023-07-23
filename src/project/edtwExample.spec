@@ -11,7 +11,7 @@ a = Analysis(
     datas=[
         ('/Users/sslvvb/Documents/S21/Projects/Python/python_calc_3/my_git_rep_python_calc/src/project/smartcalc/templates', 'smartcalc/templates'),
         ('/Users/sslvvb/Documents/S21/Projects/Python/python_calc_3/my_git_rep_python_calc/src/project/smartcalc/static', 'smartcalc/static'),
-        ('/Users/sslvvb/Documents/S21/Projects/Python/python_calc_3/my_git_rep_python_calc/src/project/config', 'config'),
+        ('/Users/sslvvb/Documents/S21/Projects/Python/python_calc_3/my_git_rep_python_calc/src/project/config', 'smartcalc/config'),
         ('/Users/sslvvb/Documents/S21/Projects/Python/python_calc_3/my_git_rep_python_calc/src/project/logs', 'logs')],
     hiddenimports=[],
     hookspath=[],
