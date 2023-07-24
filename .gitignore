@@ -4,3 +4,4 @@ dist
 build
 env_sslvvb
 .vscode
+__pycache__

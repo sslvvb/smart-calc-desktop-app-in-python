@@ -5,10 +5,12 @@ else
     ARCH := $(shell arch)
 endif
 
+# Set default target
+# .DEFAULT_GOAL := run_app
+
 # Directories
 MODEL_DIR := app/project/smartcalc/services
 PROJECT_DIR := app/project
-APP_DIR := app
 
 # Platform-specific targets
 # ifeq ($(UNAME), Linux)
@@ -31,55 +33,37 @@ endif
 #     endif
 # endif
 
-all: build run_app
+all: run_app
 
 make_env:
-# add
 
 cpp_lib:
 	cd $(MODEL_DIR) && make $(REBUILD_TARGET)
 
-python_executable:
+executable:
 	cd $(PROJECT_DIR) && pyinstaller smart_calc.spec
 
-build: cpp_lib python_executable
+installation_file:
+# Add commands for creating the installation file based on the platform
 
-run_app:
-	cd $(APP_DIR) && npm run start
-
-installer:
-	cd $(APP_DIR) && npm run digital
+run_app: cpp_lib executable installation_file
+	cd app && electron .
 
 clean:
 	cd $(PROJECT_DIR) && rm -rf build dist
-	cd $(APP_DIR) && rm -rf dist
-
-all_clean:
 # rm -f package-lock.json
-# rm -rf node_modules
+# rm -rf dist
 
 test:
 # Add commands for running tests
 
 pokritie_wtf:
-# add
 
 lint:
 # Add commands for linting the code
-# cpp & python
 
 .PHONY: cpp_lib executable installation_file run_app clean test lint
 
-
-
-
-
-tmp:
-    pkgbuild --identifier com.sample.pkg.app --root /opt/goinfre/hjerilyn/projects/python_calc_3/git_rep_python_calc/src/app/project/dist/gui Sample.pkg
-
-
-
-py2app_exe:
-	py2applet --make-setup gui.py
-	python3 setup.py py2app -A
-	hdiutil create -volname "YourAppName" -srcfolder dist/gui.app/ -ov -format UDZO YourAppName.dmg
+exe:
+	pyinstaller smart_calc.spec
+	./dist/smart_calc/smart_calc runserver localhost:8000 --noreload
