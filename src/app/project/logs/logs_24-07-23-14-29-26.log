@@ -1,0 +1,4 @@
+INFO UTC 2023-07-24 14:29:37,753 9 * 2=Error in expression; x=1.0
+INFO UTC 2023-07-24 14:30:14,583 2*x=10.0; x=5
+INFO UTC 2023-07-24 14:30:42,735 x/0=inf; x=5
+INFO UTC 2023-07-24 14:32:55,832 (((eeee=Error in expression; x=5

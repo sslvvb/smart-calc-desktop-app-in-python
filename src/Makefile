@@ -59,6 +59,7 @@ all_clean:
 # rm -rf node_modules
 
 test:
+	PYTHONPATH=.:$$PYTHONPATH pytest tests/
 # Add commands for running tests
 
 pokritie_wtf:

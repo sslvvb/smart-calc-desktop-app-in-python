@@ -61,3 +61,4 @@ def update_config(key: str, value: str) -> bool:
         return True
     else:
         return False
+

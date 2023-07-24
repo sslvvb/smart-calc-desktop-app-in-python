@@ -41,3 +41,7 @@ def graph_calculate(expression: str, x_min: str, x_max: str) -> Union[list, None
 # docstring
 # относительный путь
 # стиль для констант
+
+
+if __name__ == "__main__":
+    print(graph_calculate("x*2", "-5.0", "5.0"))
