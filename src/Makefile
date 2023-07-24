@@ -33,38 +33,34 @@ endif
 #     endif
 # endif
 
-# all: run_app
+all: run_app
+
+make_env:
 
 cpp_lib:
 	cd $(MODEL_DIR) && make $(REBUILD_TARGET)
 
 executable:
 	cd $(PROJECT_DIR) && pyinstaller smart_calc.spec
-    # Add commands for creating the executable based on the platform
-
-tmp: cpp_lib executable
-	cd app && electron .
-
 
 installation_file:
-    # Add commands for creating the installation file based on the platform
+# Add commands for creating the installation file based on the platform
 
 run_app: cpp_lib executable installation_file
-    # Add commands to run the application
+	cd app && electron .
 
 clean:
 	cd $(PROJECT_DIR) && rm -rf build dist
-# Add commands to clean the build artifacts
 # rm -f package-lock.json
 # rm -rf dist
 
 test:
-    # Add commands for running tests
+# Add commands for running tests
 
 pokritie_wtf:
 
 lint:
-    # Add commands for linting the code
+# Add commands for linting the code
 
 .PHONY: cpp_lib executable installation_file run_app clean test lint
 

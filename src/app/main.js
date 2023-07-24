@@ -6,7 +6,7 @@ const axios = require('axios');
 const fs = require('fs');
 const { execFile } = require('child_process');
 
-const FIX_PATH = '/Users/hjerilyn/Desktop/fix.txt';
+const FIX_PATH = '/Users/sslvvb/Desktop/fix.txt';
 
 fs.appendFile(FIX_PATH, app.getAppPath() + '\n', (err) => {
   if (err) {
