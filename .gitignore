@@ -6,3 +6,4 @@ env_sslvvb
 .vscode
 __pycache__
 .pytest_cache
+.idea
