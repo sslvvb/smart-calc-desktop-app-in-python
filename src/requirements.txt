@@ -5,4 +5,8 @@ django
 pytest
 unittest
 
-# https://events.webinar.ru/57027325/1857916457
+
+
+# pip3 install customtkinter
+# brew install python-tk
+customtkinter

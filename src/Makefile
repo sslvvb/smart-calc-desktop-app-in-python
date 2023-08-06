@@ -76,7 +76,8 @@ lint:
 
 
 tmp:
-    pkgbuild --identifier com.sample.pkg.app --root /opt/goinfre/hjerilyn/projects/python_calc_3/git_rep_python_calc/src/app/project/dist/gui Sample.pkg
+	pkgbuild --identifier com.sample.pkg.app --root /Users/sslvvb/Documents/S21/Projects/Python/python_calc_3/my_git_rep_python_calc/src/app/project/dist/gui Sample.pkg
+
 
 
 

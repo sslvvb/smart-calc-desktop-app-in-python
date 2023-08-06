@@ -1,9 +1,0 @@
-node_modules
-build
-dist
-reverse_text.spec
-app_exe
-env_name
-.DS_Store
-../.vscode/
-../.DS_Store
