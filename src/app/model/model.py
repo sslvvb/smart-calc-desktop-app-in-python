@@ -1,30 +1,52 @@
 # """Фасад модели. Вывает функции всех модулей модели. Cлой бизнес-логики, который вызывает другие слои бизнес-логики"""
-# from . import calculator
-# from . import history
-# from . import configs
-# from typing import Union
+from . import calculator
+from . import history
+from . import configs
+from typing import Union
+
 
 class Model:
     def __init__(self):
-        self.data = None
-
-    def get_data(self):
-        # Implement data retrieval logic here
         pass
+        # self.data = None
 
-    def process_data(self, data):
-        # Implement data processing logic here
-        pass
+    def read_history(self) -> list:
+        """Вызывает функцию чтения истории введенных выражений модуля history
 
+        Returns:
+            list: Список из введенных выражений и значения x.
+        """
+        return history.read_file()
 
+    @staticmethod  # почему его лучше делать статическим ?
+    def clean_history(self) -> None:
+        """Вызывает функцию очищения истории введенных выражений модуля history
 
-# def read_history() -> list:
-#     """Вызывает функцию чтения истории введенных выражений модуля history
+        Returns:
+            list: Пустой список введенных выражений.
+        """
+        history.clean()
 
-#     Returns:
-#         list: Список из введенных выражений и значения x.
-#     """
-#     return history.read_file()
+    @staticmethod  # почему его лучше делать статическим ?
+    def get_expression_result(self, expression: str, x_value: str) -> str:
+        """вызывает функцию
+        Вычисляет выражение. Возвращает строку - результат вычислений или текст ошибки.
+        параметры - выражение, значениие х"""
+        if "x" in expression:
+            expression = expression.replace("x", x_value)
+        result = calculator.calculate(expression)
+        if result is not None:
+            return result
+        else:
+            return "Error in expression"
+#
+# def get_data(self):
+#     # Implement data retrieval logic here
+#     pass
+#
+# def process_data(self, data):
+#     # Implement data processing logic here
+#     pass
 
 
 # def write_history(string_to_write: str) -> list:
@@ -34,28 +56,6 @@ class Model:
 #         list: Обновленный список из введенных выражений.
 #     """
 #     return history.write(string_to_write)
-
-
-# def clean_history() -> None:
-#     """Вызывает функцию очищения истории введенных выражений модуля history
-
-#     Returns:
-#         list: Пустой список введенных выражений.
-#     """
-#     history.clean()
-
-
-# def get_expression_result(expression: str, x_value: str) -> str:
-#     """вызывает функцию
-#     Вычисляет выражение. Возвращает строку - результат вычислений или текст ошибки.
-#     параметры - выражение, значениие х"""
-#     if "x" in expression:
-#         expression = expression.replace("x", x_value)
-#     result = calculator.calculate(expression)
-#     if result is not None:
-#         return result
-#     else:
-#         return "Error in expression"
 
 
 # def calculate_graph_expression_result(expression: str, x_min: str, x_max: str) -> Union[list, None]:

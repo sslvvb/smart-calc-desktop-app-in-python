@@ -1,9 +1,7 @@
-In src folder:
-  npm init -y
+# Smart Calculator desktop app in Python
 
+## About:
 
+## Usage:
 
-electron-builder@24.4.0
-npm install electron --save-dev
-npx electron-builder
-
+## Dependence:

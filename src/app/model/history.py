@@ -1,9 +1,9 @@
 """Модуль для работы с историей выражений."""
 
 from pathlib import Path
-from django.conf import settings
 
-# HISTORY_PATH: str = "data/history.txt"
+HISTORY_PATH: str = "data/history.txt"
+
 
 def read_file() -> list:
     """Чистает историю запросов из файла history.txt
@@ -11,8 +11,8 @@ def read_file() -> list:
     Returns:
         list: Список из введенных выражений и значения x.
     """
-    Path(settings.DATA_FILE_PATH).touch(exist_ok=True)
-    with open(settings.DATA_FILE_PATH, 'r', encoding='utf-8') as file:
+    Path(HISTORY_PATH).touch(exist_ok=True)
+    with open(HISTORY_PATH, 'r', encoding='utf-8') as file:
         return file.readlines()
 
 
@@ -22,8 +22,8 @@ def clean() -> None:
     Returns:
         list: Пустой список введенных выражений.
     """
-    Path(settings.DATA_FILE_PATH).touch(exist_ok=True)
-    with open(settings.DATA_FILE_PATH, 'r+', encoding='utf-8') as file:
+    Path(HISTORY_PATH).touch(exist_ok=True)
+    with open(HISTORY_PATH, 'r+', encoding='utf-8') as file:
         file.truncate(0)
 
 
@@ -33,11 +33,11 @@ def write(record_line: str) -> list:
     Returns:
         list: Обновленный список из введенных выражений и значения x.
     """
-    Path(settings.DATA_FILE_PATH).touch(exist_ok=True)
-    with open(settings.DATA_FILE_PATH, 'r', encoding='utf-8') as file:
+    Path(HISTORY_PATH).touch(exist_ok=True)
+    with open(HISTORY_PATH, 'r', encoding='utf-8') as file:
         file_lines: list = file.readlines()
-    with open(settings.DATA_FILE_PATH, 'w', encoding='utf-8') as file:
+    with open(HISTORY_PATH, 'w', encoding='utf-8') as file:
         file.write(record_line + '\n')
         file.writelines([line for line in file_lines])
-    with open(settings.DATA_FILE_PATH, 'r', encoding='utf-8') as file:
+    with open(HISTORY_PATH, 'r', encoding='utf-8') as file:
         return file.readlines()
