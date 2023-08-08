@@ -5,6 +5,7 @@ class Presenter:
 
     def run(self):
         self.view.init_ui(self)
+        self.view.set_history(self.model.read_history())
         self.view.mainloop()
 
     def handle_expression_result(self, expression: str, x_value: str) -> None:
@@ -14,7 +15,8 @@ class Presenter:
         pass
 
     def handle_delete_history(self):
-        self.model
+        self.model.clean_history()
+        # self.view.set_history(self.model.read_history())  # надо ??
 
     # def handle_user_action(self):
     #     data = self.view.get_user_input()

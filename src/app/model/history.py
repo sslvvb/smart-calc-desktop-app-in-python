@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-HISTORY_PATH: str = "data/history.txt"
+HISTORY_PATH: str = "/opt/goinfre/hjerilyn/projects/python_calc_3/git_rep_python_calc/src/app/data/history.txt"
 
 
 def read_file() -> list:

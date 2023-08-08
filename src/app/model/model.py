@@ -7,10 +7,10 @@ from typing import Union
 
 class Model:
     def __init__(self):
-        pass
-        # self.data = None
+        self.data = None
 
-    def read_history(self) -> list:
+    @staticmethod
+    def read_history() -> list:
         """Вызывает функцию чтения истории введенных выражений модуля history
 
         Returns:
@@ -18,8 +18,8 @@ class Model:
         """
         return history.read_file()
 
-    @staticmethod  # почему его лучше делать статическим ?
-    def clean_history(self) -> None:
+    @staticmethod
+    def clean_history() -> None:
         """Вызывает функцию очищения истории введенных выражений модуля history
 
         Returns:
@@ -28,7 +28,7 @@ class Model:
         history.clean()
 
     @staticmethod  # почему его лучше делать статическим ?
-    def get_expression_result(self, expression: str, x_value: str) -> str:
+    def get_expression_result(expression: str, x_value: str) -> str:
         """вызывает функцию
         Вычисляет выражение. Возвращает строку - результат вычислений или текст ошибки.
         параметры - выражение, значениие х"""

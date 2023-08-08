@@ -2,7 +2,7 @@ import customtkinter
 from presenter import presenter
 
 
-class MainButtons(customtkinter.CTkFrame):
+class MainButtons(customtkinter.CTkFrame): # ViewLogic
     """Custom frame containing checkbox elements for the calculator."""
 
     def __init__(self, master):
@@ -20,6 +20,7 @@ class MainButtons(customtkinter.CTkFrame):
         self.y_min_input = None
         self.y_max_var = None
         self.y_max_input = None
+        self.optionmenu = None
 
     def init_ui(self, presenter: presenter.Presenter) -> None:
         self.presenter = presenter
@@ -59,7 +60,7 @@ class MainButtons(customtkinter.CTkFrame):
 
     def init_buttons(self):
         buttons = [
-            ('GRAPH', 1, 0), ('x', 1, 1), ('AC', 1, 5), ('Delete history', 1, 7),
+            ('GRAPH', 1, 0), ('x', 1, 1), ('AC', 1, 5), ('Delete history', 1, 7), ('Delete history', 1, 8), ('Delete history', 1, 9),
             ('sin', 2, 0), ('asin', 2, 1), ('e', 2, 2), ('(', 2, 3), (')', 2, 4), ('^', 2, 5),
             ('cos', 3, 0), ('acos', 3, 1), ('1', 3, 2), ('2', 3, 3), ('3', 3, 4), ('/', 3, 5),
             ('tan', 4, 0), ('atan', 4, 1), ('4', 4, 2), ('5', 4, 3), ('6', 4, 4), ('*', 4, 5),
@@ -79,14 +80,10 @@ class MainButtons(customtkinter.CTkFrame):
             btn.grid(row=row, column=col, columnspan=1, padx=2, pady=2, sticky="ew")
 
     def init_history(self):
-        def optionmenu_callback(choice):
-            self.expression_var.set(choice)  # распарсить и установить значение в выражение и в икс
+        # history =
 
-        optionmenu_var = customtkinter.StringVar(value="option 2")
-        optionmenu = customtkinter.CTkOptionMenu(self, values=["option 1", "option 2"],
-                                                 command=optionmenu_callback,
-                                                 variable=optionmenu_var)
-        optionmenu.grid(row=0, column=7, columnspan=2, padx=2, pady=2, sticky="nsw")
+        self.optionmenu = customtkinter.CTkOptionMenu(self, command=self.history_menu_callback)
+        self.optionmenu.grid(row=0, column=7, columnspan=3, padx=2, pady=2, sticky="ew")
 
     def on_button_click(self, button_text):
         if button_text == "GRAPH":
@@ -110,3 +107,21 @@ class MainButtons(customtkinter.CTkFrame):
         current_expression = self.expression_var.get()
         new_expression = current_expression + text
         self.expression_var.set(new_expression)
+
+    def set_history(self, history: list):
+        if history:
+            tmp = history[0]
+            self.optionmenu.configure(values=history)
+            self.optionmenu.set(history[0])
+            # self.optionmenu.configure(variable=tmp)
+            # self.main_buttons.set_history(history)
+        else:
+            self.optionmenu.set('Empty')
+            self.optionmenu.configure(values=history)
+
+    def history_menu_callback(self, choice):
+        if choice:  # проверить что если choise нет то все работает
+            history_item = choice.rstrip()
+            split_lines: list = history_item.split('=')
+            self.expression_var.set(split_lines[0])
+            self.x_var.set(split_lines[2])

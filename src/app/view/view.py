@@ -20,4 +20,5 @@ class View(customtkinter.CTk):
     def set_expression_result(self, res: str) -> None:
         self.main_buttons.set_expression_result(res)
 
-
+    def set_history(self, history: list):
+        self.main_buttons.set_history(history)
