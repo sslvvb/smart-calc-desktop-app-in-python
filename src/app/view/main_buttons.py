@@ -85,6 +85,8 @@ class MainButtons(customtkinter.CTkFrame): # ViewLogic
         self.optionmenu = customtkinter.CTkOptionMenu(self, command=self.history_menu_callback)
         self.optionmenu.grid(row=0, column=7, columnspan=3, padx=2, pady=2, sticky="ew")
 
+    def init_config(self):
+
     def on_button_click(self, button_text):
         if button_text == "GRAPH":
             self.graph_button_callback()
