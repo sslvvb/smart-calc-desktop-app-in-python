@@ -2,14 +2,8 @@
 
 from pathlib import Path
 import yaml
-from django.conf import settings
 
-
-# import os
-# CONFIG_PATH: str = "config/config.yml"
-# tmp
-# with open('/Users/sslvvb/Desktop/config.txt', 'w') as file:
-#     file.write(os.getcwd())
+_CONFIG_PATH: str = "app/config/config.yml"
 
 
 def read_config() -> dict:
@@ -24,17 +18,15 @@ def update_config(key: str, value: str) -> None:
 
 
 def _load_config() -> dict:
-    Path(settings.CONFIG_FILE_PATH).touch(exist_ok=True)
-    with open(settings.CONFIG_FILE_PATH, 'r') as file:
+    Path(_CONFIG_PATH).touch(exist_ok=True)
+    with open(_CONFIG_PATH, 'r') as file:
         config: dict = yaml.safe_load(file) or {}
     return config
 
 
 def _dump_config(config: dict) -> None:
-    with open(settings.CONFIG_FILE_PATH, 'w') as file:
+    with open(_CONFIG_PATH, 'w') as file:
         yaml.safe_dump(config, file)
-
-# file naming ??
 
 # def write_config(config: dict) -> None:
 #     _dump_config(config)

@@ -10,28 +10,23 @@ class Model:
         self.data = None
 
     @staticmethod
-    def read_history() -> list:
-        """Вызывает функцию чтения истории введенных выражений модуля history
+    def read_config() -> dict:
+        return configs.read_config()
 
-        Returns:
-            list: Список из введенных выражений и значения x.
-        """
+    @staticmethod
+    def write_history(string_to_write: str) -> list:
+        return history.write(string_to_write)
+
+    @staticmethod
+    def read_history() -> list:
         return history.read_file()
 
     @staticmethod
     def clean_history() -> None:
-        """Вызывает функцию очищения истории введенных выражений модуля history
-
-        Returns:
-            list: Пустой список введенных выражений.
-        """
         history.clean()
 
-    @staticmethod  # почему его лучше делать статическим ?
+    @staticmethod
     def get_expression_result(expression: str, x_value: str) -> str:
-        """вызывает функцию
-        Вычисляет выражение. Возвращает строку - результат вычислений или текст ошибки.
-        параметры - выражение, значениие х"""
         if "x" in expression:
             expression = expression.replace("x", x_value)
         result = calculator.calculate(expression)
@@ -48,22 +43,8 @@ class Model:
 #     # Implement data processing logic here
 #     pass
 
-
-# def write_history(string_to_write: str) -> list:
-#     """Вызывает функцию, добавляющую запрос в историю выражений модуля history
-
-#     Returns:
-#         list: Обновленный список из введенных выражений.
-#     """
-#     return history.write(string_to_write)
-
-
 # def calculate_graph_expression_result(expression: str, x_min: str, x_max: str) -> Union[list, None]:
 #     return calculator.graph_calculate(expression, x_min, x_max)
-
-
-# def read_config() -> dict:
-#     return configs.read_config()
 
 
 # def update_config(key: str, value: str) -> bool:

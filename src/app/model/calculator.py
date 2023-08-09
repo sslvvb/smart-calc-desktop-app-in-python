@@ -3,8 +3,9 @@
 import ctypes
 from typing import Union
 
-PATH_TO_lib = '/Users/sslvvb/Documents/S21/Projects/Python/python_calc_3/my_git_rep_python_calc/src/app/model/cpp_dynamic_lib/model.so'
-# относительный пть
+PATH_TO_lib = '/opt/goinfre/hjerilyn/projects/python_calc_3/git_rep_python_calc/src/app/model/cpp_dynamic_lib/model.so'
+# '/Users/sslvvb/Documents/S21/Projects/Python/python_calc_3/my_git_rep_python_calc/src/app/model/cpp_dynamic_lib/model.so'
+# относительный путь
 number_of_steps: int = 2000
 
 
@@ -38,10 +39,7 @@ def graph_calculate(expression: str, x_min: str, x_max: str) -> Union[list, None
     else:
         return None
 
+
 # docstring
 # относительный путь
 # стиль для констант
-
-
-if __name__ == "__main__":
-    print(graph_calculate("x*2", "-5.0", "5.0"))

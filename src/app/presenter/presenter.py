@@ -5,14 +5,18 @@ class Presenter:
 
     def run(self):
         self.view.init_ui(self)
-        self.view.set_history(self.model.read_history())
+        # self.view.set_history(self.model.read_history())
+        # set config
+        self.model.read_config()
         self.view.mainloop()
 
     def handle_expression_result(self, expression: str, x_value: str) -> None:
-        res = self.model.get_expression_result(expression, x_value)
-        print(res)
-        self.view.set_expression_result(res)
-        pass
+        result = self.model.get_expression_result(expression, x_value)
+        if result != "Error in expression":
+            self.model.write_history(f'{expression}={result}; x={x_value}')
+            # обновить историю на экране # TODO
+        self.view.set_expression_result(result)
+        # logger.info(f'{expression}={result}; x={x_value}')  # TODO
 
     def handle_delete_history(self):
         self.model.clean_history()

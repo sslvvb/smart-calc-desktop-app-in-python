@@ -3,6 +3,7 @@
 from pathlib import Path
 
 HISTORY_PATH: str = "/opt/goinfre/hjerilyn/projects/python_calc_3/git_rep_python_calc/src/app/data/history.txt"
+# путь относительно корня директории - и в собранном архиве путь отдельный
 
 
 def read_file() -> list:

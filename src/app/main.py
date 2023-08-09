@@ -1,8 +1,6 @@
 from presenter.presenter import Presenter
-from model.model import *
+from model.model import Model
 from view.view import View
-
-import customtkinter
 
 if __name__ == "__main__":
     model = Model()
