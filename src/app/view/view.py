@@ -8,7 +8,7 @@ class View(customtkinter.CTk):
     def __init__(self):
         super().__init__()
         self.title("Smart Calculator")
-        self.geometry("865x700")
+        self.geometry("865x390")
         self.presenter = None
         self.expression_var = None
         self.expression_entry = None
@@ -29,6 +29,10 @@ class View(customtkinter.CTk):
 
     def init_ui(self, presenter: presenter.Presenter) -> None:
         self.presenter = presenter
+        # Устанавливаем распределение строк и столбцов для центрирования
+        self.grid_rowconfigure(0, weight=1)  # Распределение по вертикали
+        self.grid_columnconfigure(0, weight=1)  # Распределение по горизонтали
+
         self.init_entry()
         self.init_buttons()
         self.init_history()
@@ -37,32 +41,32 @@ class View(customtkinter.CTk):
     def init_entry(self):
         self.expression_var = customtkinter.StringVar()
         self.expression_entry = customtkinter.CTkEntry(self, font=("Helvetica", 15), textvariable=self.expression_var)
-        self.expression_entry.grid(row=0, column=0, columnspan=6, padx=2, pady=(2, 0), sticky="ew")
+        self.expression_entry.grid(row=0, column=0, columnspan=6, padx=2, pady=(2, 0), sticky="nsew")
 
         self.x_var = customtkinter.StringVar()
         self.x_var.set("1.0")
         self.x_input = customtkinter.CTkEntry(self, textvariable=self.x_var, font=("Helvetica", 15))
-        self.x_input.grid(row=1, column=2, columnspan=3, padx=2, pady=(2, 0), sticky="ew")
+        self.x_input.grid(row=1, column=2, columnspan=3, padx=2, pady=(2, 0), sticky="nsew")
 
         self.x_min_var = customtkinter.StringVar()
         self.x_min_var.set("1.0")
         self.x_min_input = customtkinter.CTkEntry(self, textvariable=self.x_min_var, font=("Helvetica", 15))
-        self.x_min_input.grid(row=7, column=1, columnspan=2, padx=2, pady=(2, 0), sticky="ew")
+        self.x_min_input.grid(row=7, column=1, columnspan=2, padx=2, pady=(2, 0), sticky="nsew")
 
         self.x_max_var = customtkinter.StringVar()
         self.x_max_var.set("1.0")
         self.x_max_input = customtkinter.CTkEntry(self, textvariable=self.x_max_var, font=("Helvetica", 15))
-        self.x_max_input.grid(row=7, column=4, columnspan=2, padx=2, pady=(2, 0), sticky="ew")
+        self.x_max_input.grid(row=7, column=4, columnspan=2, padx=2, pady=(2, 0), sticky="nsew")
 
         self.y_min_var = customtkinter.StringVar()
         self.y_min_var.set("1.0")
         self.y_min_input = customtkinter.CTkEntry(self, textvariable=self.y_min_var, font=("Helvetica", 15))
-        self.y_min_input.grid(row=8, column=1, columnspan=2, padx=2, pady=(2, 0), sticky="ew")
+        self.y_min_input.grid(row=8, column=1, columnspan=2, padx=2, pady=(2, 0), sticky="nsew")
 
         self.y_max_var = customtkinter.StringVar()
         self.y_max_var.set("1.0")
         self.y_max_input = customtkinter.CTkEntry(self, textvariable=self.y_max_var, font=("Helvetica", 15))
-        self.y_max_input.grid(row=8, column=4, columnspan=2, padx=2, pady=(2, 0), sticky="ew")
+        self.y_max_input.grid(row=8, column=4, columnspan=2, padx=2, pady=(2, 0), sticky="nsew")
 
     def init_buttons(self):
         buttons = [
@@ -84,12 +88,12 @@ class View(customtkinter.CTk):
             else:
                 btn = customtkinter.CTkButton(self, text=text, font=("Helvetica", 15),
                                               command=lambda t=text: self.on_button_click(t))
-            btn.grid(row=row, column=col, columnspan=1, padx=2, pady=2, sticky="ew")
+            btn.grid(row=row, column=col, columnspan=1, padx=2, pady=2, sticky="nsew")
 
     def init_history(self):
         # history =
         self.optionmenu = customtkinter.CTkOptionMenu(self, command=self.history_menu_callback)
-        self.optionmenu.grid(row=9, column=3, columnspan=3, padx=2, pady=2, sticky="ew")
+        self.optionmenu.grid(row=9, column=3, columnspan=3, padx=2, pady=2, sticky="nsew")
 
     def init_config(self):
         def radiobutton_event():
@@ -100,12 +104,18 @@ class View(customtkinter.CTk):
                                                           variable=bg_var, value=1)
         self.radiobutton_2 = customtkinter.CTkRadioButton(self, text="GREEN", command=radiobutton_event,
                                                           variable=bg_var, value=2)
-        self.radiobutton_1.grid(row=9, column=1, columnspan=1, padx=2, pady=2, sticky="ew")
-        self.radiobutton_2.grid(row=9, column=2, columnspan=1, padx=2, pady=2, sticky="ew")
+        self.radiobutton_1.grid(row=9, column=1, columnspan=1, padx=2, pady=2, sticky="nsew")
+        self.radiobutton_2.grid(row=9, column=2, columnspan=1, padx=2, pady=2, sticky="nsew")
 
         label = customtkinter.CTkLabel(self, text="Select main color", corner_radius=4,
                                        fg_color=['yellow', 'black'])
-        label.grid(row=9, column=0, columnspan=1, padx=2, pady=2, sticky="ew")
+        label.grid(row=9, column=0, columnspan=1, padx=2, pady=2, sticky="nsew")
+        label = customtkinter.CTkLabel(self, text="Select background color", corner_radius=4,
+                                       fg_color=['yellow', 'black'])
+        label.grid(row=10, column=0, columnspan=1, padx=2, pady=2, sticky="nsew")
+        label = customtkinter.CTkLabel(self, text="Select font size", corner_radius=4,
+                                       fg_color=['yellow', 'black'])
+        label.grid(row=11, column=0, columnspan=1, padx=2, pady=2, sticky="nsew")
 
     def on_button_click(self, button_text):
         if button_text == "GRAPH":
