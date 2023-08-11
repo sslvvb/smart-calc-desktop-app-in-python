@@ -11,3 +11,4 @@ unittest
 # brew install python-tk
 customtkinter
 brew install python-tk !!!
+pylint
