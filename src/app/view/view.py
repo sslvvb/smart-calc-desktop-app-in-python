@@ -16,7 +16,7 @@ class View(customtkinter.CTk):
     def init_ui(self, presenter: Presenter, config: dict) -> None:
         self.presenter = presenter
         self.main_color = config['main_color']
-        # self.bg_color = config['background']
+        self.bg_color = config['background']
 
         self.init_entry()
         self.init_buttons()
