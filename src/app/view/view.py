@@ -1,7 +1,7 @@
 import customtkinter
 
 from .graphic import Graphic
-from presenter import presenter
+from presenter.presenter import Presenter
 
 
 class View(customtkinter.CTk):
@@ -9,34 +9,19 @@ class View(customtkinter.CTk):
         super().__init__()
         self.title("Smart Calculator")
         self.geometry("865x390")
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
         self.presenter = None
-        self.expression_var = None
-        self.expression_entry = None
-        self.x_var = None
-        self.x_input = None
-        self.x_min_var = None
-        self.x_min_input = None
-        self.x_max_var = None
-        self.x_max_input = None
-        self.y_min_var = None
-        self.y_min_input = None
-        self.y_max_var = None
-        self.y_max_input = None
-        self.optionmenu = None
-        self.radiobutton_1 = None
-        self.radiobutton_2 = None
-        self.toplevel_window = None
 
-    def init_ui(self, presenter: presenter.Presenter) -> None:
+    def init_ui(self, presenter: Presenter, config: dict) -> None:
         self.presenter = presenter
-        # Устанавливаем распределение строк и столбцов для центрирования
-        self.grid_rowconfigure(0, weight=1)  # Распределение по вертикали
-        self.grid_columnconfigure(0, weight=1)  # Распределение по горизонтали
+        self.main_color = config['main_color']
+        # self.bg_color = config['background']
 
         self.init_entry()
         self.init_buttons()
         self.init_history()
-        self.init_config()
+        self.init_config(config)
 
     def init_entry(self):
         self.expression_var = customtkinter.StringVar()
@@ -90,32 +75,34 @@ class View(customtkinter.CTk):
                                               command=lambda t=text: self.on_button_click(t))
             btn.grid(row=row, column=col, columnspan=1, padx=2, pady=2, sticky="nsew")
 
+
+
     def init_history(self):
         # history =
         self.optionmenu = customtkinter.CTkOptionMenu(self, command=self.history_menu_callback)
         self.optionmenu.grid(row=9, column=3, columnspan=3, padx=2, pady=2, sticky="nsew")
 
-    def init_config(self):
-        def radiobutton_event():
-            print("radiobutton toggled, current value:", bg_var.get())
-
-        bg_var = customtkinter.IntVar(value=2)
-        self.radiobutton_1 = customtkinter.CTkRadioButton(self, text="PINK", command=radiobutton_event,
-                                                          variable=bg_var, value=1)
-        self.radiobutton_2 = customtkinter.CTkRadioButton(self, text="GREEN", command=radiobutton_event,
-                                                          variable=bg_var, value=2)
+    def init_config(self, config: dict):
+        label = customtkinter.CTkLabel(self, text="Main color", corner_radius=4, fg_color=['yellow', 'black'])
+        label.grid(row=9, column=0, columnspan=1, padx=2, pady=2, sticky="nsew")
+        self.bg_var = customtkinter.StringVar(value=self.main_color)
+        self.radiobutton_1 = customtkinter.CTkRadioButton(self, text="PINK", command=self.main_coror_event,
+                                                          variable=self.bg_var, value="pink")
+        self.radiobutton_2 = customtkinter.CTkRadioButton(self, text="GREEN", command=self.main_coror_event,
+                                                          variable=self.bg_var, value="green")
         self.radiobutton_1.grid(row=9, column=1, columnspan=1, padx=2, pady=2, sticky="nsew")
         self.radiobutton_2.grid(row=9, column=2, columnspan=1, padx=2, pady=2, sticky="nsew")
 
-        label = customtkinter.CTkLabel(self, text="Select main color", corner_radius=4,
-                                       fg_color=['yellow', 'black'])
-        label.grid(row=9, column=0, columnspan=1, padx=2, pady=2, sticky="nsew")
-        label = customtkinter.CTkLabel(self, text="Select background color", corner_radius=4,
+        label = customtkinter.CTkLabel(self, text="Background color", corner_radius=4,
                                        fg_color=['yellow', 'black'])
         label.grid(row=10, column=0, columnspan=1, padx=2, pady=2, sticky="nsew")
-        label = customtkinter.CTkLabel(self, text="Select font size", corner_radius=4,
+
+        label = customtkinter.CTkLabel(self, text="Font size", corner_radius=4,
                                        fg_color=['yellow', 'black'])
         label.grid(row=11, column=0, columnspan=1, padx=2, pady=2, sticky="nsew")
+
+    def main_coror_event(self):
+        self.presenter.handle_update_config('main_color', self.bg_var.get())
 
     def on_button_click(self, button_text):
         if button_text == "GRAPH":
@@ -160,3 +147,23 @@ class View(customtkinter.CTk):
             split_lines: list = history_item.split('=')
             self.expression_var.set(split_lines[0])
             self.x_var.set(split_lines[2])
+
+        # self.expression_var = None
+        # self.expression_entry = None
+        # self.x_var = None
+        # self.x_input = None
+        # self.x_min_var = None
+        # self.x_min_input = None
+        # self.x_max_var = None
+        # self.x_max_input = None
+        # self.y_min_var = None
+        # self.y_min_input = None
+        # self.y_max_var = None
+        # self.y_max_input = None
+        # self.optionmenu = None
+        # self.radiobutton_1 = None
+        # self.radiobutton_2 = None
+        # self.toplevel_window = None
+        # self.bg_var = None
+        # self.main_color = None
+        # self.bg_color = None

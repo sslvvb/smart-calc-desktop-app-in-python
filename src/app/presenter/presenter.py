@@ -4,11 +4,18 @@ class Presenter:
         self.view = view
 
     def run(self):
-        self.view.init_ui(self)
+        self.view.init_ui(self, self.model.read_config())
         # self.view.set_history(self.model.read_history())
         # set config
-        self.model.read_config()
         self.view.mainloop()
+
+    def handle_update_config(self, key: str, value: str):
+        if self.model.update_config(key, value):
+            # logger.info(f'{log_message} to {setting_value}')
+            pass
+        else:
+            # logger.warning(f'Failed to {log_message} to {setting_value}')
+            pass
 
     def handle_expression_result(self, expression: str, x_value: str) -> None:
         result = self.model.get_expression_result(expression, x_value)

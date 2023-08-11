@@ -1,4 +1,5 @@
-# """Фасад модели. Вывает функции всех модулей модели. Cлой бизнес-логики, который вызывает другие слои бизнес-логики"""
+# """Фасад модели. Вывает функции всех модулей модели. Cлой бизнес-логики, который вызывает другие слои бизнес-логики
+# Реализует пттерн фасад"""
 from . import calculator
 from . import history
 from . import configs
@@ -12,6 +13,15 @@ class Model:
     @staticmethod
     def read_config() -> dict:
         return configs.read_config()
+
+    @staticmethod
+    def update_config(self, key: str, value: str) -> bool:
+        key_values: set = {"background", "main_color", "font_size"}
+        if key in key_values:
+            configs.update_config(key, value)
+            return True
+        else:
+            return False
 
     @staticmethod
     def write_history(string_to_write: str) -> list:
@@ -34,7 +44,11 @@ class Model:
             return result
         else:
             return "Error in expression"
-#
+
+    @staticmethod
+    def calculate_graph_expression_result(self, expression: str, x_min: str, x_max: str) -> Union[list, None]:
+        return calculator.graph_calculate(expression, x_min, x_max)
+
 # def get_data(self):
 #     # Implement data retrieval logic here
 #     pass
@@ -43,14 +57,3 @@ class Model:
 #     # Implement data processing logic here
 #     pass
 
-# def calculate_graph_expression_result(expression: str, x_min: str, x_max: str) -> Union[list, None]:
-#     return calculator.graph_calculate(expression, x_min, x_max)
-
-
-# def update_config(key: str, value: str) -> bool:
-#     key_values: set = {"background", "main_color", "font_size"}
-#     if key in key_values:
-#         configs.update_config(key, value)
-#         return True
-#     else:
-#         return False
