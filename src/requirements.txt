@@ -12,3 +12,4 @@ unittest
 customtkinter
 brew install python-tk !!!
 pylint
+matplotlib

@@ -6,7 +6,7 @@ else
 endif
 
 # Directories
-MODEL_DIR := app/project/smartcalc/services
+MODEL_DIR := app/model
 PROJECT_DIR := app/project
 APP_DIR := app
 

@@ -7,3 +7,4 @@ env_sslvvb
 __pycache__
 .pytest_cache
 .idea
+model.so

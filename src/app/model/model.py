@@ -15,25 +15,13 @@ class Model:
         return configs.read_config()
 
     @staticmethod
-    def update_config(self, key: str, value: str) -> bool:
+    def update_config(key: str, value: str) -> bool:
         key_values: set = {"background", "main_color", "font_size"}
         if key in key_values:
             configs.update_config(key, value)
             return True
         else:
             return False
-
-    @staticmethod
-    def write_history(string_to_write: str) -> list:
-        return history.write(string_to_write)
-
-    @staticmethod
-    def read_history() -> list:
-        return history.read_file()
-
-    @staticmethod
-    def clean_history() -> None:
-        history.clean()
 
     @staticmethod
     def get_expression_result(expression: str, x_value: str) -> str:
@@ -46,14 +34,20 @@ class Model:
             return "Error in expression"
 
     @staticmethod
-    def calculate_graph_expression_result(self, expression: str, x_min: str, x_max: str) -> Union[list, None]:
+    def calculate_graph_expression_result(expression: str, x_min: str, x_max: str) -> Union[list, None]:
         return calculator.graph_calculate(expression, x_min, x_max)
 
-# def get_data(self):
-#     # Implement data retrieval logic here
-#     pass
-#
-# def process_data(self, data):
-#     # Implement data processing logic here
-#     pass
+
+
+    @staticmethod
+    def write_history(string_to_write: str) -> list:
+        return history.write(string_to_write)
+
+    @staticmethod
+    def read_history() -> list:
+        return history.read_file()
+
+    @staticmethod
+    def clean_history() -> None:
+        history.clean()
 
