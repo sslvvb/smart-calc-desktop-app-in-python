@@ -1,7 +1,8 @@
 import customtkinter as ctk
 import matplotlib.pyplot as plt
 
-from .graphic import Graphic
+from .error import Error
+from .about import About
 from presenter.presenter import Presenter
 
 
@@ -30,6 +31,9 @@ class View(ctk.CTk):
 
         self.history = None
         self.history_menu = None
+
+        self.error_window = None
+        self.about_window = None
 
     def init_ui(self, presenter: Presenter, config: dict, history: list) -> None:
         self.presenter = presenter
@@ -188,15 +192,14 @@ class View(ctk.CTk):
         elif button_text == "AC":
             self.expression_var.set('')
         elif button_text == "=":
-            if str(self.x_var.get()) != '':
-                self.presenter.handle_expression_result(self.expression_var.get(), str(self.x_var.get()))
-            else:
-                print('ggg')  #
-                pass  #
+            self.presenter.handle_expression_result(self.expression_var.get(), str(self.x_var.get()))
         elif button_text == "Delete history":
             self.presenter.handle_delete_history()
         elif button_text == "About app":
-            pass  # справка
+            if self.about_window is None or not self.about_window.winfo_exists():
+                self.about_window = About(self, background=self.get_code_bg_color(self.background))
+            else:
+                self.about_window.focus()
         else:
             self.append_to_expression(button_text)
 
@@ -204,11 +207,16 @@ class View(ctk.CTk):
         if self.check_coordinates():
             self.presenter.handle_graphic_result(self.expression_var.get(), self.x_min_var.get(), self.x_max_var.get())
         else:
-            print('error')
-            pass  # error
+            self._show_error_message('Error in expression or coordinate values.')
+
+    def _show_error_message(self, message: str) -> None:
+        if self.error_window is None or not self.error_window.winfo_exists():
+            self.error_window = Error(self, message=message, background=self.get_code_bg_color(self.background))
+        else:
+            self.error_window.focus()
 
     def check_coordinates(self) -> bool:
-        if (self.x_min_var.get() != '' and self.x_max_var.get() != '' and
+        if (self.expression_var.get() != '' and self.x_min_var.get() != '' and self.x_max_var.get() != '' and
                 self.y_min_var.get() != '' and self.y_max_var.get() != ''):
             if (float(self.x_min_var.get()) < float(self.x_max_var.get()) and float(self.y_min_var.get()) < float(
                     self.y_max_var.get())):
@@ -230,8 +238,9 @@ class View(ctk.CTk):
 
     def append_to_expression(self, text):
         current_expression = self.expression_var.get()
-        new_expression = current_expression + text
-        self.expression_var.set(new_expression)
+        if len(current_expression) + len(text) <= 255:
+            new_expression = current_expression + text
+            self.expression_var.set(new_expression)
 
     def configure_children(self):
         for child in self.winfo_children():

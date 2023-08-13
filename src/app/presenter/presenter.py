@@ -1,7 +1,6 @@
 import os
 import logging
 from datetime import datetime
-from logging import Formatter
 from logging.handlers import TimedRotatingFileHandler
 from typing import Union
 
@@ -15,7 +14,6 @@ class Presenter:
     def run(self):
         self._logger.info("Start app")
         self.view.init_ui(self, self.model.read_config(), self.model.read_history())
-        # self.view.set_history(self.model.read_history())
         self.view.mainloop()
 
     def handle_update_config(self, key: str, value: str):
