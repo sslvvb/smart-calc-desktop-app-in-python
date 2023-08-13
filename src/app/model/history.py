@@ -2,7 +2,9 @@
 
 from pathlib import Path
 
-_HISTORY_PATH: str = "/opt/goinfre/hjerilyn/projects/python_calc_3/git_rep_python_calc/src/app/data/history.txt"
+_HISTORY_PATH: str = "/Users/sslvvb/Documents/S21/Projects/Python/python_calc_3/my_git_rep_python_calc/src/app/data/history.txt"
+
+
 # путь относительно корня директории - и в собранном архиве путь отдельный
 
 

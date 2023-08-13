@@ -37,8 +37,6 @@ class Model:
     def calculate_graph_expression_result(expression: str, x_min: str, x_max: str) -> Union[list, None]:
         return calculator.graph_calculate(expression, x_min, x_max)
 
-
-
     @staticmethod
     def write_history(string_to_write: str) -> list:
         return history.write(string_to_write)
@@ -50,4 +48,3 @@ class Model:
     @staticmethod
     def clean_history() -> None:
         history.clean()
-

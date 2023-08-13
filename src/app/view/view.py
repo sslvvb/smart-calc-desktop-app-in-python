@@ -27,13 +27,16 @@ class View(ctk.CTk):
         self.x_max_var = ctk.StringVar()
         self.y_min_var = ctk.StringVar()
         self.y_max_var = ctk.StringVar()
+
+        self.history = None
         self.history_menu = None
 
-    def init_ui(self, presenter, config) -> None:
+    def init_ui(self, presenter: Presenter, config: dict, history: list) -> None:
         self.presenter = presenter
         self.main_color = config['main_color']
         self.background = config['background']
         self.font_size = config['font_size']
+        self.history = history
         self.init_config()
         self.init_entry()
         self.init_buttons()
@@ -142,30 +145,35 @@ class View(ctk.CTk):
             self.buttons.append(btn)
 
     def init_history(self):
-        self.history_menu = ctk.CTkOptionMenu(self, command=self.history_menu_callback,
-                                              fg_color=self.get_code_main_color(self.main_color),
-                                              button_color=self.get_code_main_color(self.main_color),
-                                              button_hover_color='#454545', text_color='#343230')
+        self.history_menu = ctk.CTkOptionMenu(
+            self,
+            command=self._history_menu_callback,
+            values=self._history_menu_values(),
+            fg_color=self.get_code_main_color(self.main_color),
+            button_color=self.get_code_main_color(self.main_color),
+            button_hover_color='#454545',
+            text_color='#343230',
+            dynamic_resizing=False
+        )
         self.history_menu.grid(row=9, column=3, columnspan=3)
-        # history =
 
-    def set_history(self, history: list):
-        if history:
-            tmp = history[0]
-            self.optionmenu.configure(values=history)
-            self.optionmenu.set(history[0])
-            # self.optionmenu.configure(variable=tmp)
-            # self.main_buttons.set_history(history)
-        else:
-            self.optionmenu.set('Empty')
-            self.optionmenu.configure(values=history)
+    def _history_menu_values(self):
+        return self.history if self.history else ['No History']
 
-    def history_menu_callback(self, choice):
-        if choice:  # проверить что если choise нет то все работает
+    def _history_menu_callback(self, choice):
+        if choice != 'No History':
             history_item = choice.rstrip()
             split_lines: list = history_item.split('=')
             self.expression_var.set(split_lines[0])
             self.x_var.set(split_lines[2])
+
+    def update_history(self, history: list):
+        self.history = history
+        self.history_menu.configure(values=self._history_menu_values())
+        if self.history:
+            self.history_menu.set(self.history[0])
+        else:
+            self.history_menu.set('No History')
 
     def init_label(self):
         labels_info = [("Color", 9, 0), ("Background", 10, 0), ("Font size", 11, 0), ("x_min", 7, 0),
