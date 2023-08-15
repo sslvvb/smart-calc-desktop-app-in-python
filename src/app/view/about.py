@@ -28,6 +28,11 @@ Using SmartCalc:
 4. Explore the history panel to review past calculations and reload expressions.
 5. To plot a function, enter the function expression, specify the display range, and press 'GRAPH'.
 
+Configurations:
+- Background color.
+- Main accent color.
+- Font size.
+
 Limitations:
 - Input can contain up to 255 characters.
 - Graphs are limited to the defined value area and definition area.

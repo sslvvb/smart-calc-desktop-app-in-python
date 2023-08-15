@@ -3,7 +3,12 @@
 from pathlib import Path
 import yaml
 
-_CONFIG_PATH: str = "app/config/config.yml"
+import os
+
+base_dir = os.path.dirname(__file__)
+_CONFIG_PATH = os.path.join(base_dir, './config/config.yml')
+
+# _CONFIG_PATH: str = "config/config.yml"
 
 
 def read_config() -> dict:

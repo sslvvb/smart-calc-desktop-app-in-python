@@ -12,8 +12,10 @@ class Presenter:
         self._logger = setup_logging('H')
 
     def run(self):
+        print(os.path.abspath(__file__))
         self._logger.info("Start app")
-        self.view.init_ui(self, self.model.read_config(), self.model.read_history())
+        print(self.model.read_config())
+        # self.view.init_ui(self, self.model.read_config(), self.model.read_history())
         self.view.mainloop()
 
     def handle_update_config(self, key: str, value: str):
