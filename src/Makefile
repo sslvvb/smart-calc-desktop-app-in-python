@@ -88,9 +88,7 @@ clean:
 #
 #
 #
-setup:
-	py2applet --make-setup app/main.py
 
 app:
-	python3 setup.py py2app -A
-# 	hdiutil create -volname "YourAppName" -srcfolder dist/main.app/ -ov -format UDZO YourAppName.dmg
+	python3 setup.py py2app
+	hdiutil create -format UDBZ -srcfolder dist/main.app MyProgram.dmg

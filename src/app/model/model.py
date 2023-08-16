@@ -1,14 +1,18 @@
-# """Фасад модели. Вывает функции всех модулей модели. Cлой бизнес-логики, который вызывает другие слои бизнес-логики
-# Реализует пттерн фасад"""
+"""Facade class for interacting with different modules of the model.
+Implements the facade design pattern."""
+
+from typing import Union
+
 from . import calculator
 from . import history
 from . import configs
-from typing import Union
 
 
 class Model:
-    def __init__(self):
-        self.data = None
+    """
+    Facade class for interacting with different modules of the model.
+    Implements the facade design pattern.
+    """
 
     @staticmethod
     def read_config() -> dict:
@@ -16,25 +20,22 @@ class Model:
 
     @staticmethod
     def update_config(key: str, value: str) -> bool:
-        key_values: set = {"background", "main_color", "font_size"}
-        if key in key_values:
+        allowed_keys: set = {"background", "main_color", "font_size"}
+        if key in allowed_keys:
             configs.update_config(key, value)
             return True
-        else:
-            return False
+        return False
 
     @staticmethod
     def get_expression_result(expression: str, x_value: str) -> str:
-        if "x" in expression:
-            expression = expression.replace("x", x_value)
+        expression = expression.replace("x", x_value)
         result = calculator.calculate(expression)
-        if result is not None:
-            return result
-        else:
-            return "Error in expression"
+        return result if result is not None else "Error in expression"
 
     @staticmethod
-    def calculate_graph_expression_result(expression: str, x_min: str, x_max: str) -> Union[list, None]:
+    def calculate_graph_expression_result(
+            expression: str, x_min: str, x_max: str
+    ) -> Union[list, None]:
         return calculator.graph_calculate(expression, x_min, x_max)
 
     @staticmethod
