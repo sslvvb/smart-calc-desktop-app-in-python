@@ -1,14 +1,11 @@
 """Модуль для работы с файлом конфигурации."""
 
-from pathlib import Path
-import yaml
-
 import os
+import yaml
+from pathlib import Path
 
-base_dir = os.path.dirname(__file__)
-_CONFIG_PATH = os.path.join(base_dir, './config/config.yml')
-
-# _CONFIG_PATH: str = "config/config.yml"
+current_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+_CONFIG_PATH = os.path.join(current_directory, 'config/config.yml')
 
 
 def read_config() -> dict:
@@ -23,6 +20,8 @@ def update_config(key: str, value: str) -> None:
 
 
 def _load_config() -> dict:
+    # if not os.path.exists(log_dir):
+    #     os.makedirs(log_dir)
     Path(_CONFIG_PATH).touch(exist_ok=True)
     with open(_CONFIG_PATH, 'r') as file:
         config: dict = yaml.safe_load(file) or {}

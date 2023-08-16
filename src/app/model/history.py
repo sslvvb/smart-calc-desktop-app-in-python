@@ -1,11 +1,10 @@
 """Модуль для работы с историей выражений."""
 
+import os
 from pathlib import Path
 
-_HISTORY_PATH: str = "/Users/sslvvb/Documents/S21/Projects/Python/python_calc_3/my_git_rep_python_calc/src/app/data/history.txt"
-
-
-# путь относительно корня директории - и в собранном архиве путь отдельный
+current_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+_HISTORY_PATH = os.path.join(current_directory, 'data/history.txt')
 
 
 def read_file() -> list:
