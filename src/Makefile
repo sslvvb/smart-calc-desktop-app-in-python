@@ -3,6 +3,40 @@
 UNAME := $(shell uname)
 ARCH := $(shell arch)
 
+# ifeq ($(OS),Windows_NT)
+#     ARCH := $(PROCESSOR_ARCHITECTURE)
+# else
+#     UNAME := $(shell uname)
+#     ARCH := $(shell arch)
+# endif
+#
+# # Directories
+# MODEL_DIR := app/model
+# PROJECT_DIR := app/project
+# APP_DIR := app
+#
+# # Platform-specific targets
+# # ifeq ($(UNAME), Linux)
+# #     REBUILD_TARGET := rebuild-linux
+# # endif
+# ifeq ($(UNAME), Darwin)
+#     ifeq ($(ARCH), x86_64)
+#         REBUILD_TARGET := rebuild-macos-intel
+#     endif
+#     ifeq ($(ARCH), arm64)
+#         REBUILD_TARGET := rebuild-macos-arm
+#     endif
+# endif
+# # ifeq ($(OS),Windows_NT)
+# #     ifeq ($(ARCH), AMD64)
+# #         REBUILD_TARGET := rebuild-windows-64
+# #     endif
+# #     ifeq ($(ARCH), x86)
+# #         REBUILD_TARGET := rebuild-windows-32
+# #     endif
+# # endif
+
+
 ifeq ($(UNAME), Darwin)
     ifeq ($(ARCH), x86_64)
         REBUILD_TARGET := rebuild-macos-intel
