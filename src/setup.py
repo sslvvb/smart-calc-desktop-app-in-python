@@ -7,9 +7,9 @@ Usage:
 
 from setuptools import setup
 
-APP = ['main.py']
-DATA_FILES = []  # ('config', ['config/config.yml'])
-OPTIONS = {}
+APP = ['app/main.py']
+DATA_FILES = []
+OPTIONS = {'iconfile': 'favicon.icns'}
 
 setup(
     app=APP,

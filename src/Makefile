@@ -1,94 +1,70 @@
-.PHONY: clean, app
+.PHONY: all installer test lint clean_all
+
+UNAME := $(shell uname)
+ARCH := $(shell arch)
+
+ifeq ($(UNAME), Darwin)
+    ifeq ($(ARCH), x86_64)
+        REBUILD_TARGET := rebuild-macos-intel
+    endif
+    ifeq ($(ARCH), arm64)
+        REBUILD_TARGET := rebuild-macos-arm
+    endif
+endif
+
+###############################################################
+#                            MAIN                             #
+###############################################################
+
+all: run_app
+
+env:
+	python3 -m venv env_sslvvb
+	source env_sslvvb/bin/activate
+	pip3 install --upgrade pip
+	pip3 install -r requirements.txt
+
+run_app: build_cpp
+	python3 app/main.py
+
+installer:
+	python3 setup.py py2app
+	hdiutil create -format UDBZ -srcfolder dist/main.app SmartCalc.dmg
+
+###############################################################
+#                            BUILD                            #
+###############################################################
+
+build_cpp:
+	make $(REBUILD_TARGET)
+
+rebuild-macos-intel:
+	g++ -shared -o app/model/cpp_dynamic_lib/model.so app/model/cpp_dynamic_lib/source/model.cpp app/model/cpp_dynamic_lib/source/parser.cpp app/model/cpp_dynamic_lib/source/wrapper.cpp
+
+rebuild-macos-arm:
+	g++-12 -arch arm64 -shared -o app/model/cpp_dynamic_lib/model.so app/model/cpp_dynamic_lib/source/model.cpp app/model/cpp_dynamic_lib/source/parser.cpp app/model/cpp_dynamic_lib/source/wrapper.cpp
+
+###############################################################
+#                            TESTS                            #
+###############################################################
+
+coverage: build_cpp
+	cd app/model; python3 -m coverage run --source=. -m unittest
+	cd app/model; coverage html
+	open app/model/htmlcov/index.html
+
+lint:
+	pylint --rcfile pylintrc app/main.py app/view/*.py app/presenter/*.py app/model/*.py
+
+###############################################################
+#                            CLEAN                            #
+###############################################################
 
 clean:
-	rm -rf build dist
+	rm -rf build dist app/model/htmlcov
+	rm -f SmartCalc.dmg app/model/.coverage
 
-
-
-# ifeq ($(OS),Windows_NT)
-#     ARCH := $(PROCESSOR_ARCHITECTURE)
-# else
-#     UNAME := $(shell uname)
-#     ARCH := $(shell arch)
-# endif
-#
-# # Directories
-# MODEL_DIR := app/model
-# PROJECT_DIR := app/project
-# APP_DIR := app
-#
-# # Platform-specific targets
-# # ifeq ($(UNAME), Linux)
-# #     REBUILD_TARGET := rebuild-linux
-# # endif
-# ifeq ($(UNAME), Darwin)
-#     ifeq ($(ARCH), x86_64)
-#         REBUILD_TARGET := rebuild-macos-intel
-#     endif
-#     ifeq ($(ARCH), arm64)
-#         REBUILD_TARGET := rebuild-macos-arm
-#     endif
-# endif
-# # ifeq ($(OS),Windows_NT)
-# #     ifeq ($(ARCH), AMD64)
-# #         REBUILD_TARGET := rebuild-windows-64
-# #     endif
-# #     ifeq ($(ARCH), x86)
-# #         REBUILD_TARGET := rebuild-windows-32
-# #     endif
-# # endif
-#
-# all: build run_app
-#
-# make_env:
-# # add
-#
-# cpp_lib:
-# 	cd $(MODEL_DIR) && make $(REBUILD_TARGET)
-#
-# python_executable:
-# 	cd $(PROJECT_DIR) && pyinstaller smart_calc.spec
-#
-# build: cpp_lib python_executable
-#
-# run_app:
-# 	cd $(APP_DIR) && npm run start
-#
-# installer:
-# 	cd $(APP_DIR) && npm run digital
-#
-# clean:
-# 	cd $(PROJECT_DIR) && rm -rf build dist
-# 	cd $(APP_DIR) && rm -rf dist
-#
-# all_clean:
-# # rm -f package-lock.json
-# # rm -rf node_modules
-#
-# test:
-# 	PYTHONPATH=.:$$PYTHONPATH pytest tests/
-# # Add commands for running tests
-#
-# pokritie_wtf:
-# # add
-#
-# lint:
-# # Add commands for linting the code
-# # cpp & python
-#
-# .PHONY: cpp_lib executable installation_file run_app clean test lint
-#
-#
-#
-#
-#
-# tmp:
-# 	pkgbuild --identifier com.sample.pkg.app --root /Users/sslvvb/Documents/S21/Projects/Python/python_calc_3/my_git_rep_python_calc/src/app/project/dist/gui Sample.pkg
-#
-#
-#
-#
-
-app:
-	python3 setup.py py2app
-	hdiutil create -format UDBZ -srcfolder dist/main.app MyProgram.dmg
+clean_all: clean
+	rm -rf env_sslvvb
+	rm -f app/model/cpp_dynamic_lib/model.so
+	# deactivate

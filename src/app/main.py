@@ -1,6 +1,6 @@
 """
 This is the main module of the application.
-It coordinates the interaction between the model, view, and presenter components.
+It coordinates the interaction between the model, view, and presenter.
 """
 
 from presenter import presenter

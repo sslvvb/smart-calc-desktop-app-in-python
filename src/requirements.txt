@@ -1,33 +1,6 @@
-# pyyaml
-# pytz
-# pyinstaller==5.12.0
-# django
-# pytest
-# unittest
-#
-#
-#
-# # pip3 install customtkinter
-# # brew install python-tk
-# customtkinter
-# brew install python-tk !!!
-# pylint
-# matplotlib
-#
-#
-# # package
-# py2app
-
-
-
-
-
-# ban - delete from my mac
-# matplotlib==3.7.1
-# numpy==1.24.2
-# PyQt6==6.5.0
-# PyQt6-Qt6==6.5.0
-# PyQt6-sip==13.5.0
-# pyinstaller==5.10.1
-# pyinstaller-hooks-contrib==2023.2
-# pylint==2.17.2
+customtkinter==5.2.0
+PyYAML==6.0
+matplotlib==3.7.1
+pylint==2.17.2
+coverage==7.3.0
+numpy==1.25.2

@@ -1,3 +1,7 @@
+"""
+Module for displaying the "About" information window.
+"""
+
 import customtkinter
 
 _HELP_TEXT = """Welcome to SmartCalc 3.0
@@ -41,13 +45,17 @@ SmartCalc Version 3.0 | Developed by @sslvvb"""
 
 
 class About(customtkinter.CTkToplevel):
+    """Class for displaying the "About" information window."""
+
     def __init__(self, *args, background: str, **kwargs):
         super().__init__(*args, **kwargs)
-        self.title('About')
+        self.title("About")
         self.resizable(False, False)
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
-        self.textbox = customtkinter.CTkTextbox(master=self, width=500, height=400, corner_radius=0)
+        self.textbox = customtkinter.CTkTextbox(
+            master=self, width=500, height=400, corner_radius=0
+        )
         self.textbox.grid(row=0, column=0, sticky="nsew")
         self.textbox.insert("0.0", _HELP_TEXT)
         self.textbox.configure(fg_color=background)
