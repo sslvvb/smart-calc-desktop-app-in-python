@@ -37,10 +37,10 @@ else
 endif
 
 rebuild-macos-intel:
-	g++ -shared -o src/app/model/cpp_dynamic_lib/model.so src/app/model/cpp_dynamic_lib/source/model.cpp src/app/model/cpp_dynamic_lib/source/parser.cpp src/app/model/cpp_dynamic_lib/source/wrapper.cpp
+	g++ -shared -o $(CPP_LIBRARY) src/app/model/cpp_dynamic_lib/source/model.cpp src/app/model/cpp_dynamic_lib/source/parser.cpp src/app/model/cpp_dynamic_lib/source/wrapper.cpp
 
 rebuild-macos-arm:
-	g++ -arch arm64 -shared -o src/app/model/cpp_dynamic_lib/model.so src/app/model/cpp_dynamic_lib/source/model.cpp src/app/model/cpp_dynamic_lib/source/parser.cpp src/app/model/cpp_dynamic_lib/source/wrapper.cpp
+	g++ -arch arm64 -shared -o $(CPP_LIBRARY) src/app/model/cpp_dynamic_lib/source/model.cpp src/app/model/cpp_dynamic_lib/source/parser.cpp src/app/model/cpp_dynamic_lib/source/wrapper.cpp
 
 run:
 	@echo "Running the app..."

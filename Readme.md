@@ -2,7 +2,6 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Dependencies](#dependencies)
 - [Installation](#installation)
 - [Features](#features)
 - [Usage](#usage)
