@@ -74,7 +74,6 @@ The app should now be up and running (I use MacOS) 🚀
   - Graphs are limited to the defined value area and definition area.
 
 ## Usage
-Using SmartCalc:
 1. Enter your expression.
 2. Utilize parentheses to group sub-expressions as needed.
 3. Press '=' to calculate the result of the expression.
