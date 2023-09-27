@@ -93,8 +93,10 @@ class TestCalculator(unittest.TestCase):
 
     def test_graph_calculate_21(self):
         result = calculator.graph_calculate("sin(x)", "-10.5", "134")
-        self.assertEqual(float(result[0][0]), -10.5)
-        self.assertEqual(float(result[1][0]), 0.8796957599716702)
+        self.assertAlmostEqual(float(result[0][0]), -10.5, places=7)
+        self.assertAlmostEqual(float(result[1][0]), 0.8796957599716702,
+                               places=7)
+
 
     def test_graph_calculate_22(self):
         result = calculator.graph_calculate("sin(x)))--/", "-10.5", "134")

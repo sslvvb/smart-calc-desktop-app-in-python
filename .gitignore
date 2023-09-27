@@ -10,3 +10,6 @@ __pycache__
 model.so
 logs
 .eggs
+venv
+htmlcov
+*.dmg

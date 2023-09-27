@@ -2,7 +2,7 @@
 Module for displaying the "About" information window.
 """
 
-import customtkinter
+import customtkinter as ctk
 
 _HELP_TEXT = """Welcome to SmartCalc 3.0
 
@@ -44,7 +44,7 @@ Limitations:
 SmartCalc Version 3.0 | Developed by @sslvvb"""
 
 
-class About(customtkinter.CTkToplevel):
+class About(ctk.CTkToplevel):
     """Class for displaying the "About" information window."""
 
     def __init__(self, *args, background: str, **kwargs):
@@ -53,7 +53,7 @@ class About(customtkinter.CTkToplevel):
         self.resizable(False, False)
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
-        self.textbox = customtkinter.CTkTextbox(
+        self.textbox = ctk.CTkTextbox(
             master=self, width=500, height=400, corner_radius=0
         )
         self.textbox.grid(row=0, column=0, sticky="nsew")
