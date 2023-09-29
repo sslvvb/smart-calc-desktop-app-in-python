@@ -2,6 +2,7 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
+- [Technologies](#technologies)
 - [Installation](#installation)
 - [Features](#features)
 - [Usage](#usage)
@@ -18,6 +19,13 @@ The "core" of the calculator in the form of an algorithm for the formation and c
 Prepared full coverage of methods in the model layer with unit tests.
 
 ![](https://github.com/sslvvb/smart-calc-desktop-app-in-python/blob/main/materials/screen.gif)
+
+## Technologies
+- Python 3.11
+- Customtkinter
+- Ctypes
+- Pytest
+- C++
 
 ## Installation
 - Clone this repo to your local machine.
